@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="css/theme/default.css" id="theme">
 
     <!-- For syntax highlighting -->
-    <link rel="stylesheet" href="lib/css/zenburn.css">
+    <link rel="stylesheet" href="lib/css/tomorrow-night.css">
 
     <!-- If the query includes 'print-pdf', include the PDF print sheet -->
     <script>
@@ -156,13 +156,13 @@
           <script type="text/template">
             ### Line
 
-            ```
+            ```ruby
             def foo(arg)
               arg ? "a" : "b"
             end
             ```
 
-            ```
+            ```ruby
             expect(foo(true)).to eq "a"
             ```
 
@@ -267,7 +267,7 @@
 
             Original:
 
-            ```
+            ```ruby
             i = 0
             while i != 10
               do_something
@@ -277,7 +277,7 @@
 
             Mutant:
 
-            ```
+            ```ruby
             i = 0
             while i < 10
               do_something
@@ -293,7 +293,7 @@
 
             Original:
 
-            ```
+            ```ruby
             while expression
               do_something
             end
@@ -301,7 +301,7 @@
 
             Mutation:
 
-            ```
+            ```ruby
             while true
               do_something
             end
@@ -333,7 +333,7 @@
 
             AST:
 
-            ```
+            ```ruby
             p Parser::CurrentRuby.parse("2 + 2")
             # (send
             #   (int 2) :+
@@ -437,7 +437,7 @@
           { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
           { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
           { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/highlight/highlight.min.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
           { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
           { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
         ]
