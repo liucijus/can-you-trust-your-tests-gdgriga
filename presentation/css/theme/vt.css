@@ -142,6 +142,11 @@ body {
   float: left;
   width: 50%; }
 
+.code-blocks pre {
+  float: left;
+  width: 45%;
+  margin: 0px 10px; }
+
 .reveal h1 {
   font-size: 2.5em; }
 
