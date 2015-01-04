@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>Can you trust your tests?</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="css/reveal.min.css">
+    <link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+      if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+      }
+    </script>
+  </head>
+
+  <body>
+
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+
+        <section data-markdown>
+          <script type="text/template">
+            # Can you trust your tests?
+
+            <img src="./images/vilnius-rb.png" width=160
+              style="margin: 80px 10px -20px 0"/>
+            <span class="who">
+              2015 Tadas Ščerbinskas & Vaidas Pilkauskas
+            </span>
+          </script>
+        </section>
+
+        <section>
+          <div>
+            <div class="box left">
+              Tadas Ščerbinskas
+            </div>
+            <div class="box right">
+              Vaidas Pilkauskas
+            </div>
+          </div>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Agenda
+            * Test code quality
+            * Mutation testing
+            * Mutant - mutation testing for Ruby
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ### Prod vs. Test code quality
+
+            <blockquote class="twitter-tweet" lang="en" style="font-size: 26px">
+              <p>SUCCESS: 26/26 (100%) Tests passed</p><br>
+              <!-- <img src="https://pbs.twimg.com/media/BjkX6v0CQAA4JNT.jpg"> -->
+              <img src="images/all_tests_pass.jpg">
+              <br>&mdash; Bernd Lörwald (@bloerwald)
+              <a href="https://twitter.com/bloerwald/status/448415935926255618">March 25, 2014</a>
+            </blockquote>
+          </script>
+        </section>
+
+        <section>
+          Code has bugs.<br>
+          Tests are code.<br>
+          Tests have bugs.
+        </section>
+
+        <section data-background="./images/who_watches_the_watchmen.jpg">
+        </section>
+
+
+        <section data-markdown class="coverage">
+          <script type="text/template">
+            > "Program testing can be used to show the presence of bugs, but never to show their absence!"
+            <br>
+            <a>- Edsger W. Dijkstra</a>
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            <aside class="notes">
+             should discuss two aspects: test specification and code quality,
+             list is only of test specification qualifiers
+            </aside>
+
+            ### Test Quality
+            * Readable
+            * Focused
+            * Concise
+            * Well named
+            * etc.
+
+          </script>
+        </section>
+
+        <section data-markdown data-background="./images/monkey.jpg">
+          <script type="text/template">
+            <!-- http://www.chimpsanctuarynw.org/blog/wp-content/uploads/2009/03/negra-covered-in-pink-blanket-front-room_web_mg_8161.jpg -->
+            ### Code coverage
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ### Types of code coverage
+            * Line
+            * Branch
+            * Condition
+            * Path
+            * Data
+            * etc.
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ### Coverage tool for Ruby
+            simplecov
+            ```
+            gem install simplecov
+            ```
+            ```ruby
+            require 'simplecov'
+            SimpleCov.start
+            ```
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ### Line
+
+            ```
+            def foo(arg)
+              arg ? "a" : "b"
+            end
+            ```
+
+            ```
+            expect(foo(true)).to eq "a"
+            ```
+
+            100% line coverage. No test for "b".
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            <img src="./images/coverage1.png"
+            style="margin-top: -120px; width: 800px">
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ### Branch
+
+            ```ruby
+            def foo(arg = true)
+              if arg
+                a || c
+              else
+                b
+              end
+            end
+            ```
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            # Demo
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ### Can you trust 100% coverage?
+            * Code coverage can show what is not tested, but not how good your tests are
+            * _100% code coverage for interpreted languages is like full compilation_
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            <!--- presentation moves to 2nd part. Should be marked like that? -->
+            ### Mutation testing
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ### Mutation testing
+            Changes (mutates) your program code and expects your tests to fail.
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ### Mutation testing
+
+            <p>Applying a mutation to some code creates a *mutant*.</p>
+            <p>If test passes - mutant has *survived*.</p>
+            <p>If test fails - mutant is *killed*.</p>
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            <!--- picture? -->
+            ## Failing is the new passing
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            Tests’ effectiveness is measured by number of killed mutants by your test suite
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ### What if mutant survives
+            * Simplify your code
+            * Add additional tests
+            <br><br>
+            * TDD - minimal amount of code to pass the test
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ### Challenges
+            * High computation cost - slow
+            * Equivalent mutants - false negatives
+            * Infinite loops
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ### Equivalent mutations
+
+            Original:
+
+            ```
+            i = 0
+            while i != 10
+              do_something
+              i += 1
+            end
+            ```
+
+            Mutant:
+
+            ```
+            i = 0
+            while i < 10
+              do_something
+              i += 1
+            end
+            ```
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ### Infinite Runtime
+
+            Original:
+
+            ```
+            while expression
+              do_something
+            end
+            ```
+
+            Mutation:
+
+            ```
+            while true
+              do_something
+            end
+            ```
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ### Mutant
+            * Active project
+            * Good reporting
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Mutant
+            * only works with **rspec** (as of now)
+            * there's a branch for **minitest**, but no commits since April, 2014.
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ### How
+
+            Mutant uses a pure Ruby parser and an unparser to do its magic.
+
+            AST:
+
+            ```
+            p Parser::CurrentRuby.parse("2 + 2")
+            # (send
+            #   (int 2) :+
+            #   (int 2))
+            ```
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ### Mutations
+            - literal / primitive and compound
+            - statement deletion
+            - conditional
+            - binary connective replacement
+            - argument deletion / rename / swap
+            - unary operator exchange
+            - bitwise
+            - and more
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ### Test-Selection
+
+            Mutant uses the "longest rspec example group descriptions prefix match"
+            to select the tests to run.
+
+            For a subject like: **Foo::Bar#baz**
+            It will run example groups with description prefixes:
+
+            1. Foo::Bar#baz
+            2. Foo::Bar
+            3. Foo
+
+            Order is important. If mutant finds (1), won't run (2) and (3).
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            # Demo
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ### Disadvantages
+            * Are there good enough tools?
+            * Slow - cannot be part of TDD rhythm
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ### Summary
+            * May point weakness of your tests
+            * May be very noisy
+
+            <br>
+            * Normal code coverage highlights code that is definitely *not* tested.
+            * Mutation testing highlights code that definitely *is* tested.
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Thanks!
+            ### Q & A
+          </script>
+        </section>
+
+      </div>
+
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.min.js"></script>
+
+    <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: false,
+        progress: true,
+        history: true,
+        center: true,
+        width: 1400,
+
+        theme: Reveal.getQueryHash().theme || 'vt', // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'none', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Parallax scrolling
+        // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+        // parallaxBackgroundSize: '2100px 900px',
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>
