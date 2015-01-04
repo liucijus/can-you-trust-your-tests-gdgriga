@@ -182,11 +182,11 @@
             ### Branch
 
             ```ruby
-            def foo(arg = true)
-              if arg
-                a || c
+            def discount(age, privileged = false)
+              if age > 60 || privileged
+                0.5
               else
-                b
+                0.1
               end
             end
             ```
