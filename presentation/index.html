@@ -355,17 +355,23 @@
           <script type="text/template">
             ### Test-Selection
 
-            Mutant uses the "longest rspec example group descriptions prefix match"
-            to select the tests to run.
+            *“Longest rspec example group<br>
+            descriptions’ prefix match”*
 
-            For a subject like: **Foo::Bar#baz**
-            It will run example groups with description prefixes:
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ### Test-Selection
+
+            ```sh
+            mutant --include lib --require bar --use rspec Foo::Bar#baz
+            ```
 
             1. Foo::Bar#baz
             2. Foo::Bar
             3. Foo
-
-            Order is important. If mutant finds (1), won't run (2) and (3).
           </script>
         </section>
 
