@@ -157,13 +157,13 @@
             ### Line
 
             ```ruby
-            def foo(arg)
+            def foo(arg = true)
               arg ? "a" : "b"
             end
             ```
 
             ```ruby
-            expect(foo(true)).to eq "a"
+            expect(foo).to eq "a"
             ```
 
             100% line coverage. No test for "b".
