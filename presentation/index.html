@@ -323,6 +323,20 @@
 
         <section data-markdown>
           <script type="text/template">
+            ### Use timeouts
+
+            ```ruby
+            config.around(:each) do |example|
+              Timeout.timeout(2) do
+                example.run
+              end
+            end
+            ```
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
             ### Mutant
             * Active project
             * Good reporting
