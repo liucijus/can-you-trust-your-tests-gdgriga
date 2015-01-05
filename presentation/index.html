@@ -253,6 +253,23 @@
 
         <section data-markdown>
           <script type="text/template">
+            ### Hunting tips
+
+            ```ruby
+            # Avoid literals
+            posts[0] => posts.first
+
+            # Don’t overuse syntactic constructs
+            ::User => User
+
+            # Don’t pass literal defaults
+            num.to_s(10) => num.to_s
+            ```
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
             ### Challenges
             * High computation cost - slow
             * Equivalent mutants - false negatives
