@@ -76,32 +76,24 @@
         <section data-markdown>
           <script type="text/template">
             ### Prod vs. Test code quality
+
+            Code has bugs.<br>
+            Tests are code.<br>
+            Tests have bugs.
           </script>
         </section>
 
-        <section data-markdown data-background="./images/all_tests_pass.jpg">
-          <!-- https://twitter.com/bloerwald/status/448415935926255618 -->
+        <section data-markdown>
           <script type="text/template">
-            #### SUCCESS: 26/26 (100%) Tests passed
-          </script>
-        </section>
+            ### Prod vs. Test code quality
 
-        <section>
-          Code has bugs.<br>
-          Tests are code.<br>
-          Tests have bugs.
+            Code has bugs.<br>
+            Tests are code.<br>
+            Tests have bugs.
+          </script>
         </section>
 
         <section data-background="./images/who_watches_the_watchmen.jpg">
-        </section>
-
-
-        <section data-markdown class="coverage">
-          <script type="text/template">
-            > "Program testing can be used to show the presence of bugs, but never to show their absence!"
-            <br>
-            <a>- Edsger W. Dijkstra</a>
-          </script>
         </section>
 
         <section data-markdown>
@@ -116,8 +108,15 @@
             * Focused
             * Concise
             * Well named
-            * etc.
 
+          </script>
+        </section>
+
+        <section data-markdown class="coverage">
+          <script type="text/template">
+            > "Program testing can be used to show the presence of bugs, but never to show their absence!"
+            <br>
+            <a>- Edsger W. Dijkstra</a>
           </script>
         </section>
 
@@ -136,7 +135,6 @@
             * Condition
             * Path
             * Data
-            * etc.
           </script>
         </section>
 
@@ -172,22 +170,22 @@
           </script>
         </section>
 
-        <section data-background="./images/cov1.png"></section>
-        <section data-background="./images/cov2.png"></section>
-
         <section data-markdown>
           <script type="text/template">
             ### Branch
 
             ```ruby
-            def discount(age, privileged = false)
-              if age > 60 || privileged
-                0.5
-              else
-                0.1
-              end
+            def foo(arg)
+              arg ? "a" : "b"
             end
             ```
+
+            ```ruby
+            expect(foo(true)).to eq "a"
+            expect(foo(false)).to eq "b"
+            ```
+
+            100% branch coverage
           </script>
         </section>
 
@@ -205,6 +203,13 @@
           </script>
         </section>
 
+        <section data-markdown data-background="./images/all_tests_pass.jpg">
+          <!-- https://twitter.com/bloerwald/status/448415935926255618 -->
+          <script type="text/template">
+            #### SUCCESS: 26/26 (100%) Tests passed
+          </script>
+        </section>
+
         <section data-background="./images/crowrilla.jpg">
           <h3 style="color: #e7ad52">
             Mutation testing
@@ -214,7 +219,8 @@
         <section data-markdown>
           <script type="text/template">
             ### Mutation testing
-            Changes (mutates) your program code and expects your tests to fail.
+            Changes your program code and<br>
+            expects your tests to fail.
           </script>
         </section>
 
