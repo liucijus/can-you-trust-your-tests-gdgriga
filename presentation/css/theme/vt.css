@@ -145,7 +145,7 @@ body {
 .code-blocks pre {
   float: left;
   width: 45%;
-  margin: 0px 10px; }
+  margin: 0 10px; }
 
 .reveal h1 {
   font-size: 2.5em; }
@@ -169,3 +169,7 @@ em, .orange {
   color: #e7ad52; }
 
 /*# sourceMappingURL=vt.css.map */
+
+.reveal .credits {
+  font-size: 0.5em;
+}
