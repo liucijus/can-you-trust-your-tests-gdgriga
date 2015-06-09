@@ -149,27 +149,6 @@
           </script>
         </section>
 
-        <!--
-        System.out.println("foobar");
-
-        -->
-
-        <section data-markdown>
-          <script type="text/template">
-            ### Line
-
-            ```java
-            System.out.println("foobar");
-            ```
-
-            ```bytecode
-            GETSTATIC java/lang/System.out : Ljava/io/PrintStream;
-            LDC "foobar"
-            INVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V
-            ```
-          </script>
-        </section>
-
         <section data-markdown>
           <script type="text/template">
             ### Line
@@ -185,6 +164,22 @@
             ```
 
             100% line coverage. No test for "b".
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ### Individual line coverage
+
+            ```java
+            System.out.println("foobar");
+            ```
+
+            ```bytecode
+            GETSTATIC java/lang/System.out : Ljava/io/PrintStream;
+            LDC "foobar"
+            INVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V
+            ```
           </script>
         </section>
 
