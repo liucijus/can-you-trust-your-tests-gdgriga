@@ -174,14 +174,14 @@
           <script type="text/template">
             ### Line
 
-            ```ruby
-            def foo(arg = true)
-              arg ? "a" : "b"
-            end
+            ```java
+            boolean doFoo(boolean arg) {
+              return arg ? "a" : "b";
+            }
             ```
 
-            ```ruby
-            expect(foo).to eq "a"
+            ```java
+            assertThat(a.doFoo(true), is("a"));
             ```
 
             100% line coverage. No test for "b".
