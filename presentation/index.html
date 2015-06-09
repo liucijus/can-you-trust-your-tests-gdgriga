@@ -46,7 +46,7 @@
             <img src="./images/vilnius-rb.png" width=160
               style="margin: 80px 10px -20px 0"/>
             <span class="who">
-              2015 Tadas Ščerbinskas & Vaidas Pilkauskas
+              2015 Vaidas Pilkauskas & Tadas Ščerbinskas
             </span>
           </script>
         </section>
@@ -141,14 +141,31 @@
 
         <section data-markdown>
           <script type="text/template">
-            ### Coverage tool for Ruby
-            simplecov
+            ### Java Coverage runners
+            * JaCoCo
+            * Clover
+            * Cobertura
+            * EMMA (discontinued, works only up to Java 7)
+          </script>
+        </section>
+
+        <!--
+        System.out.println("foobar");
+
+        -->
+
+        <section data-markdown>
+          <script type="text/template">
+            ### Line
+
+            ```java
+            System.out.println("foobar");
             ```
-            gem install simplecov
-            ```
-            ```ruby
-            require 'simplecov'
-            SimpleCov.start
+
+            ```bytecode
+            GETSTATIC java/lang/System.out : Ljava/io/PrintStream;
+            LDC "foobar"
+            INVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V
             ```
           </script>
         </section>
