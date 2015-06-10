@@ -69,7 +69,7 @@
             ## Agenda
             * Test code quality
             * Mutation testing
-            * Mutant - mutation testing for Ruby
+            * PIT - mutation testing for Java
           </script>
         </section>
 
@@ -141,16 +141,6 @@
 
         <section data-markdown>
           <script type="text/template">
-            ### Java Coverage runners
-            * JaCoCo
-            * Clover
-            * Cobertura
-            * EMMA (discontinued, works only up to Java 7)
-          </script>
-        </section>
-
-        <section data-markdown>
-          <script type="text/template">
             ### Line
 
             ```java
@@ -169,12 +159,12 @@
 
         <section data-markdown>
           <script type="text/template">
-            ### Individual line coverage
-
+            ### Line coverage completeness
+            Java source:
             ```java
             System.out.println("foobar");
             ```
-
+            Bytecode:
             ```bytecode
             GETSTATIC java/lang/System.out : Ljava/io/PrintStream;
             LDC "foobar"
@@ -203,6 +193,16 @@
 
         <section data-markdown>
           <script type="text/template">
+            ### Java Coverage runners
+            * JaCoCo
+            * Clover
+            * Cobertura
+            * EMMA (discontinued, works only up to Java 7)
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
             # Demo
           </script>
         </section>
@@ -212,6 +212,14 @@
             ### Can you trust 100% coverage?
             * Code coverage can only show what is *not* tested
             * 100% code coverage for interpreted languages is kind of like full compilation
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ### Code coverage can be gamed:
+            * On purpose
+            * By accident
           </script>
         </section>
 
@@ -292,22 +300,22 @@
           <script type="text/template">
             ### Equivalent mutations
 
-            ```ruby
-            # Original
-            i = 0
-            while i != 10
-              do_something
-              i += 1
-            end
+            ```java
+            // Original
+            int i = 0;
+            while (i != 10) {
+              doSomething();
+              i += 1;
+            }
             ```
 
-            ```ruby
-            # Mutant
-            i = 0
-            while i < 10
-              do_something
-              i += 1
-            end
+            ```java
+            // Mutant
+            int i = 0;
+            while (i < 10) {
+              doSomething();
+              i += 1;
+            }
             ```
           </script>
         </section>
@@ -316,42 +324,26 @@
           <script type="text/template">
             ### Infinite Runtime
 
-            ```ruby
-            # Original
-            while expression
-              do_something
-            end
+            ```java
+            // Original
+            while (expression)
+              doSomething();
             ```
 
-            ```ruby
-            # Mutation
-            while true
-              do_something
-            end
+            ```java
+            // Mutation
+            while (true)
+              doSomething();
             ```
           </script>
         </section>
 
         <section data-markdown>
           <script type="text/template">
-            ### Use timeouts
-
-            ```ruby
-            config.around(:each) do |example|
-              Timeout.timeout(2) do
-                example.run
-              end
-            end
-            ```
-          </script>
-        </section>
-
-        <section data-markdown>
-          <script type="text/template">
-            ### Mutant
+            ### PIT
             * Active project
             * Good reporting
-            * Only works with **rspec**
+            * Does not work with Scala
           </script>
         </section>
 
@@ -359,69 +351,143 @@
           <script type="text/template">
             ### How
 
-            *Can’t just do*
-            `String#gsub`
+            *Won't go far with naive approach using*
+            `String.replace`
           </script>
         </section>
 
         <section data-markdown>
           <script type="text/template">
-            ### How
+            ### Source code manipulation
+            #### Pros
+            * A large range of mutations can be generated this way
+            * Mutations can closely mimic the types of error a programmer might make
+            * The mutations made can be clearly described and understood
 
-            Mutant uses a pure Ruby *parser*<br>
-            and an *unparser* to do its magic.
+            #### Cons
+            * Source based mutators are generally harder to integrate into a build
+            * Generating mutations in this way is relatively slow
+            * Mutants must be written to disk, limiting the methods by which they can be inserted
+            * In theory a mutant class could be accidentally released
+          </script>
+        </section>
 
-            AST:
+        <section>
+          <script type="text/template">
+            ### Byte code manipulation
+            #### Pros
+            * Generally much faster
+            * Generally easier to integrate into a build
+            * Can potentially create mutants without access to source files
+            * Same mutation operators can in theory work for other JVM languages
 
-            ```ruby
-            p Parser::CurrentRuby.parse("2 + 2")
-            # (send
-            #   (int 2) :+
-            #   (int 2))
-            ```
+            #### Cons
+            * More difficult to develop mutation operators this way
+            * Mutations are divorced from the source code and may not be representative of errors a programmer would make
+            * Can be hard to describe / explain the mutations that must work roud intricacies of the JVM
+          </script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
+            ### How PIT does it?
+
+            PIT uses ASM to generate mutations
+
           </script>
         </section>
 
         <section data-markdown>
           <script type="text/template">
             ### Mutations
-            - Literal / primitive and compound
-            - Statement deletion
-            - Conditional
-            - Binary connective replacement
-            - Argument deletion / rename / swap
-            - Unary operator exchange
-            - Bitwise
+            #### Activated by default
+            - Conditionals Boundary Mutator
+            - Increments Mutator
+            - Invert Negatives Mutator
+            - Math Mutator
+            - Negate Conditionals Mutator
+            - Return Values Mutator
+            - Void Method Calls Mutator
+            #### Deactivated by default
+            - Constructor Calls Mutator
+            - Inline Constant Mutator
+            - Non Void Method Calls Mutator
+            - Remove Conditionals Mutator
+            - Experimental Member Variable Mutator
+            - Experimental Switch Mutator
           </script>
         </section>
 
         <section data-markdown>
           <script type="text/template">
             ### Test-Selection
-
-            *“Longest rspec example group<br>
-            descriptions’ prefix match”*
-
-          </script>
-        </section>
-
-        <section data-markdown>
-          <script type="text/template">
-            ### Test-Selection
-
-            ```sh
-            $ mutant --include lib --require bar --use rspec Foo::Bar#baz
-            ```
-
-            1. Foo::Bar#baz
-            2. Foo::Bar
-            3. Foo
+            * Line coverage
+            * Test execution speed
+            * Test naming convention
           </script>
         </section>
 
         <section data-markdown>
           <script type="text/template">
             # Demo
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+          ### Running PIT
+          * Command line tool
+          * Maven
+          * Ant
+          * Sbt. But useful only for java :(
+          * Gradle
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+          ### Maven example
+          ```bash
+          mvn org.pitest:pitest-maven:mutationCoverage
+          ```
+
+          With SCM plugin
+          ```bash
+          mvn org.pitest:pitest-maven:scmMutationCoverage \
+           -Dinclude=ADDED,UNKNOWN -DmutationThreshold=85
+          ```
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+          ### Dependency distance
+          How far the test is from the mutated class
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+          ### Limit mutation number per class
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+          ### Activate/deactivate mutators
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+          ### Extension points
+          Uses Java Service Provider - SPI
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+          ### Output
+          HTML (default), XML, CSV
           </script>
         </section>
 
@@ -453,11 +519,11 @@
         <section data-markdown class="credits">
           <script type="text/template">
             ###### Pictures
-            - s05 - http://crazy-monkeeey.deviantart.com/art/Who-watches-the-Watchmen-344523349
-            - s08 - http://www.chimpsanctuarynw.org/blog/wp-content/uploads/2009/03/negra-covered-in-pink-blanket-front-room_web_mg_8161.jpg
-            - s15 - https://twitter.com/bloerwald/status/448415935926255618
-            - s16 - http://www.smosh.com/smosh-pit/photos/12-more-bizarre-mutant-animals
-            - s21 - https://tbgsecurity.com/the-history-of-hacking-timeline-of-hacking-techniques-infographic/
+            - http://crazy-monkeeey.deviantart.com/art/Who-watches-the-Watchmen-344523349
+            - http://www.chimpsanctuarynw.org/blog/wp-content/uploads/2009/03/negra-covered-in-pink-blanket-front-room_web_mg_8161.jpg
+            - https://twitter.com/bloerwald/status/448415935926255618
+            - http://www.smosh.com/smosh-pit/photos/12-more-bizarre-mutant-animals
+            - https://tbgsecurity.com/the-history-of-hacking-timeline-of-hacking-techniques-infographic/
           </script>
         </section>
       </div>
