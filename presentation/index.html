@@ -54,12 +54,15 @@
         <section>
           <div>
             <div class="box right">
-              Vaidas Pilkauskas
-              @liucijus
+              Vaidas Pilkauskas<br>
+              @liucijus<br>
+              Vilnius JUG<br>
+              Vilnius Scala
             </div>
             <div class="box left">
-              Tadas Ščerbinskas
-              @tadassce
+              Tadas Ščerbinskas<br>
+              @tadassce<br>
+              VilniusRB
             </div>
           </div>
         </section>
@@ -357,65 +360,85 @@
           </script>
         </section>
 
+        <section>
+          <div>
+            <h3>Source code manipulation</h3>
+            <div class="box right">
+            <h4>Pros</h4>
+              <ul>
+                <li>Large number of mutations
+                <li>Close to the real code
+                <li>Understandable
+              </ul>
+            </div>
+            <div class="box left">
+            <h4>Cons</h4>
+              <ul>
+                <li>Hard to integrate
+                <li>Slow
+                <li>Uses disk
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div>
+            <h3>Byte code manipulation</h3>
+            <div class="box right">
+              <h4>Pros</h4>
+              <ul>
+                <li>Fast
+                <li>Easy to integrate
+                <li>No source code
+                <li><em>Should</em> be JVM lang agnostic
+              </ul>
+            </div>
+            <div class="box left">
+              <h4>Cons</h4>
+              <ul>
+                <li>Difficult
+                <li>Divorced from the code
+                <li>Hard to describe
+              </ul>
+            </div>
+          </div>
+        </section>
         <section data-markdown>
           <script type="text/template">
-            ### Source code manipulation
-            #### Pros
-            * A large range of mutations can be generated this way
-            * Mutations can closely mimic the types of error a programmer might make
-            * The mutations made can be clearly described and understood
+            ### How does PIT do it?
 
-            #### Cons
-            * Source based mutators are generally harder to integrate into a build
-            * Generating mutations in this way is relatively slow
-            * Mutants must be written to disk, limiting the methods by which they can be inserted
-            * In theory a mutant class could be accidentally released
+            PIT uses ASM to generate mutations
           </script>
         </section>
 
         <section>
-          <script type="text/template">
-            ### Byte code manipulation
-            #### Pros
-            * Generally much faster
-            * Generally easier to integrate into a build
-            * Can potentially create mutants without access to source files
-            * Same mutation operators can in theory work for other JVM languages
-
-            #### Cons
-            * More difficult to develop mutation operators this way
-            * Mutations are divorced from the source code and may not be representative of errors a programmer would make
-            * Can be hard to describe / explain the mutations that must work roud intricacies of the JVM
-          </script>
-        </section>
-        <section data-markdown>
-          <script type="text/template">
-            ### How PIT does it?
-
-            PIT uses ASM to generate mutations
-
-          </script>
-        </section>
-
-        <section data-markdown>
-          <script type="text/template">
-            ### Mutations
-            #### Activated by default
-            - Conditionals Boundary Mutator
-            - Increments Mutator
-            - Invert Negatives Mutator
-            - Math Mutator
-            - Negate Conditionals Mutator
-            - Return Values Mutator
-            - Void Method Calls Mutator
-            #### Deactivated by default
-            - Constructor Calls Mutator
-            - Inline Constant Mutator
-            - Non Void Method Calls Mutator
-            - Remove Conditionals Mutator
-            - Experimental Member Variable Mutator
-            - Experimental Switch Mutator
-          </script>
+          <div>
+            <h3>Mutations</h3>
+            <div class="box right">
+              <h4>Activated</h4>
+              <ul style="font-size: 70%">
+                <li>Conditionals Boundary Mutator
+                <li>Increments Mutator
+                <li>Invert Negatives Mutator
+                <li>Math Mutator
+                <li>Negate Conditionals Mutator
+                <li>Return Values Mutator
+                <li>Void Method Calls Mutator
+              </ul>
+            </div>
+            <div class="box left">
+              <h4>Deactivated</h4>
+              <ul style="font-size: 70%">
+                <li>Constructor Calls Mutator
+                <li>Inline Constant Mutator
+                <li>Non Void Method Calls Mutator
+                <li>Remove Conditionals Mutator
+                <li>Experimental Member Variable Mutator
+                <li>Experimental Switch Mutator
+              </ul>
+            </div>
+          </div>
         </section>
 
         <section data-markdown>
@@ -446,7 +469,7 @@
 
         <section data-markdown>
           <script type="text/template">
-            ### PIT supports many mocking frameworks
+            #### PIT supports many mocking frameworks
             * Mockito
             * EasyMock
             * JMock
@@ -472,27 +495,11 @@
 
         <section data-markdown>
           <script type="text/template">
-          ### Dependency distance
-          How far the test is from the mutated class
-          </script>
-        </section>
-
-        <section data-markdown>
-          <script type="text/template">
-          ### Limit mutation number per class
-          </script>
-        </section>
-
-        <section data-markdown>
-          <script type="text/template">
-          ### Activate/deactivate mutators
-          </script>
-        </section>
-
-        <section data-markdown>
-          <script type="text/template">
-          ### Extension points
-          Uses Java Service Provider - SPI
+            ### Configuration
+            * Dependency distance
+            * Limit mutation number per class
+            * Activate/deactivate mutators
+            * Extension points - Java SPI
           </script>
         </section>
 
