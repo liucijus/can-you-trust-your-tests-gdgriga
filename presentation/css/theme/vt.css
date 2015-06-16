@@ -4,6 +4,24 @@
  */
 @import url(https://fonts.googleapis.com/css?family=Montserrat:700);
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic,700italic);
+@font-face {
+  font-family: 'Open Sans';
+  src: url("../../lib/font/OpenSans-Regular.eot?v=1.1.0");
+  src: url("../../lib/font/OpenSans-Regular.eot?#iefix&v=1.1.0") format("embedded-opentype"), url("././../lib/font/OpenSans-Regular.woff2?v=1.1.0") format("woff2"), url("../../lib/font/OpenSans-Regular.woff?v=1.1.0") format("woff"), url("../../lib/font/OpenSans-Regular.ttf?v=1.1.0") format("truetype"), url("../../lib/font/OpenSans-Regular.svg?v=1.1.0#Regular") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'Open Sans';
+  src: url("../../lib/font/OpenSans-Bold.eot?v=1.1.0");
+  src: url("../../lib/font/OpenSans-Bold.eot?#iefix&v=1.1.0") format("embedded-opentype"), url("../../lib/font/OpenSans-Bold.woff2?v=1.1.0") format("woff2"), url("../../lib/font/OpenSans-Bold.woff?v=1.1.0") format("woff"), url("../../lib/font/OpenSans-Bold.ttf?v=1.1.0") format("truetype"), url("../../lib/font/OpenSans-Bold.svg?v=1.1.0#Bold") format("svg");
+  font-weight: bold;
+  font-style: normal; }
+@font-face {
+  font-family: 'Montserrat';
+  src: url("../../lib/font/montserrat-bold-webfont.eot?v=1.1.0");
+  src: url("../../lib/font/montserrat-bold-webfont.eot?#iefix&v=1.1.0") format("embedded-opentype"), url("../../lib/font/montserrat-bold-webfont.woff2?v=1.1.0") format("woff2"), url("../../lib/font/montserrat-bold-webfont.woff?v=1.1.0") format("woff"), url("../../lib/font/montserrat-bold-webfont.ttf?v=1.1.0") format("truetype"), url("../../lib/font/montserrat-bold-webfont.svg?v=1.1.0#Bold") format("svg");
+  font-weight: bold;
+  font-style: normal; }
 /*********************************************
  * GLOBAL STYLES
  *********************************************/
@@ -145,7 +163,7 @@ body {
 .code-blocks pre {
   float: left;
   width: 45%;
-  margin: 0 10px; }
+  margin: 0px 10px; }
 
 .reveal h1 {
   font-size: 2.5em; }
@@ -169,7 +187,3 @@ em, .orange {
   color: #e7ad52; }
 
 /*# sourceMappingURL=vt.css.map */
-
-.reveal .credits {
-  font-size: 0.5em;
-}
