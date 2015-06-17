@@ -184,7 +184,8 @@ body {
 span.who {
   font-size: 30px; }
 
-em, .orange {
+.reveal em, .orange {
+  font-style: normal;
   color: #e7ad52; }
 
 .reveal .credits li {
