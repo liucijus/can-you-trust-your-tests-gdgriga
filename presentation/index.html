@@ -54,13 +54,13 @@
         <section>
           <div>
             <div class="box right">
-              Vaidas Pilkauskas<br>
+              <a>Vaidas Pilkauskas</a><br>
               @liucijus<br>
               Vilnius JUG<br>
               Vilnius Scala
             </div>
             <div class="box left">
-              Tadas Ščerbinskas<br>
+              <a>Tadas Ščerbinskas</a><br>
               @tadassce<br>
               VilniusRB
             </div>
@@ -70,29 +70,21 @@
         <section data-markdown>
           <script type="text/template">
             ## Agenda
-            * Test code quality
-            * Mutation testing
-            * PIT - mutation testing for Java
+            * Test code quality               <!-- .element: class="fragment" -->
+            * Mutation testing                <!-- .element: class="fragment" -->
+            * PIT - mutation testing for Java <!-- .element: class="fragment" -->
           </script>
-        </section>
-
-        <section>
-          <h3>Prod vs. Test code quality</h3>
-
-          <p style="color: #111">
-            Code has bugs.<br>
-            Tests are code.<br>
-            Tests have bugs.
-          </p>
         </section>
 
         <section data-markdown>
           <script type="text/template">
             ### Prod vs. Test code quality
 
-            Code has bugs.<br>
-            Tests are code.<br>
-            Tests have bugs.
+            Code has bugs.   <!-- .element: class="fragment" -->
+
+            Tests are code.  <!-- .element: class="fragment" -->
+
+            Tests have bugs. <!-- .element: class="fragment" -->
           </script>
         </section>
 
@@ -107,10 +99,10 @@
             </aside>
 
             ### Test Quality
-            * Readable
-            * Focused
-            * Concise
-            * Well named
+            * Readable   <!-- .element: class="fragment" -->
+            * Focused    <!-- .element: class="fragment" -->
+            * Concise    <!-- .element: class="fragment" -->
+            * Well named <!-- .element: class="fragment" -->
 
           </script>
         </section>
@@ -132,17 +124,17 @@
 
         <section data-markdown>
           <script type="text/template">
-            ### Types of code coverage
-            * Instructions (C0 Coverage)
-            * Branches (C1 Coverage)
-            * Cyclomatic Complexity
-            * Lines
-            * Methods
-            * Classes
+            #### Types of code coverage
+            * Instructions (C0 Coverage) <!-- .element: class="fragment" -->
+            * Branches (C1 Coverage) <!-- .element: class="fragment" -->
+            * Cyclomatic Complexity <!-- .element: class="fragment" -->
+            * Lines <!-- .element: class="fragment" -->
+            * Methods <!-- .element: class="fragment" -->
+            * Classes <!-- .element: class="fragment" -->
           </script>
         </section>
 
-        <section data-markdown>
+        <section data-markdown class="code-blocks">
           <script type="text/template">
             ### Line
 
@@ -151,32 +143,40 @@
               return arg ? "a" : "b";
             }
             ```
+            <!-- .element: class="fragment" -->
 
             ```java
             assertThat(a.doFoo(true), is("a"));
             ```
+            <!-- .element: class="fragment" -->
 
-            100% line coverage. No test for "b".
+            <div class="fragment clear">
+              100% line coverage. No test for "b".
+            </div>
           </script>
         </section>
 
         <section data-markdown>
           <script type="text/template">
-            ### Line coverage completeness
-            Java source:
+            #### Line coverage completeness
+
             ```java
             System.out.println("foobar");
             ```
+            <!-- .element: class="fragment" -->
+
             Bytecode:
+            <!-- .element: class="fragment" -->
             ```bytecode
             GETSTATIC java/lang/System.out : Ljava/io/PrintStream;
             LDC "foobar"
             INVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V
             ```
+            <!-- .element: class="fragment" -->
           </script>
         </section>
 
-        <section data-markdown>
+        <section data-markdown class="code-blocks">
           <script type="text/template">
             ### Branch
 
@@ -185,13 +185,17 @@
               return arg ? "a" : "b";
             }
             ```
+            <!-- .element: class="fragment" -->
 
             ```java
             assertThat(a.doFoo(true), is("a"));
             assertThat(a.doFoo(false), is("b"));
             ```
+            <!-- .element: class="fragment" -->
 
-            100% branch coverage
+            <div class="fragment clear">
+              100% branch coverage
+            </div>
           </script>
         </section>
 
@@ -214,16 +218,23 @@
         <section data-markdown>
           <script type="text/template">
             ### Can you trust 100% coverage?
+
             * Code coverage can only show what is *not* tested
+            <!-- .element: class="fragment" -->
+
             * 100% code coverage for interpreted languages is kind of like full compilation
+            <!-- .element: class="fragment" -->
           </script>
         </section>
 
         <section data-markdown>
           <script type="text/template">
-            ### Code coverage can be gamed:
+            ### Code coverage can be gamed
+
             * On purpose
+            <!-- .element: class="fragment" -->
             * By accident
+            <!-- .element: class="fragment" -->
           </script>
         </section>
 
@@ -252,9 +263,9 @@
           <script type="text/template">
             ### Terminology
 
-            <p>Applying a mutation to some code creates a *mutant*.</p>
-            <p>If test passes - mutant has *survived*.</p>
-            <p>If test fails - mutant is *killed*.</p>
+            <p class="fragment">Applying a mutation to some code creates a *mutant*.</p>
+            <p class="fragment">If test passes - mutant has *survived*.</p>
+            <p class="fragment">If test fails - mutant is *killed*.</p>
           </script>
         </section>
 
@@ -285,9 +296,11 @@
           <script type="text/template">
             ### What if mutant survives
             * Simplify your code
+            <!-- .element: class="fragment" -->
             * Add additional tests
-            <br><br>
+            <!-- .element: class="fragment" -->
             * TDD - minimal amount of code to pass the test
+            <!-- .element: class="fragment" -->
           </script>
         </section>
 
@@ -295,8 +308,11 @@
           <script type="text/template">
             ### Challenges
             * High computation cost - slow
+            <!-- .element: class="fragment" -->
             * Equivalent mutants - false negatives
+            <!-- .element: class="fragment" -->
             * Infinite loops
+            <!-- .element: class="fragment" -->
           </script>
         </section>
 
@@ -335,7 +351,7 @@
             ```
 
             ```java
-            // Mutation
+            // Mutant
             while (true)
               doSomething();
             ```
@@ -346,8 +362,11 @@
           <script type="text/template">
             ### PIT
             * Active project
+            <!-- .element: class="fragment" -->
             * Good reporting
+            <!-- .element: class="fragment" -->
             * Does not work with Scala
+            <!-- .element: class="fragment" -->
           </script>
         </section>
 
@@ -366,17 +385,17 @@
             <div class="box right">
             <h4>Pros</h4>
               <ul>
-                <li>Large number of mutations
-                <li>Close to the real code
-                <li>Understandable
+                <li class="fragment">Large number of mutations
+                <li class="fragment">Close to the real code
+                <li class="fragment">Understandable
               </ul>
             </div>
             <div class="box left">
             <h4>Cons</h4>
               <ul>
-                <li>Hard to integrate
-                <li>Slow
-                <li>Uses disk
+                <li class="fragment">Hard to integrate
+                <li class="fragment">Slow
+                <li class="fragment">Uses disk
               </ul>
             </div>
           </div>
@@ -388,18 +407,18 @@
             <div class="box right">
               <h4>Pros</h4>
               <ul>
-                <li>Fast
-                <li>Easy to integrate
-                <li>No source code
-                <li><em>Should</em> be JVM lang agnostic
+                <li class="fragment">Fast
+                <li class="fragment">Easy to integrate
+                <li class="fragment">No source code
+                <li class="fragment"><em>Should</em> be JVM lang agnostic
               </ul>
             </div>
             <div class="box left">
               <h4>Cons</h4>
               <ul>
-                <li>Difficult
-                <li>Divorced from the code
-                <li>Hard to describe
+                <li class="fragment">Difficult
+                <li class="fragment">Divorced from the code
+                <li class="fragment">Hard to describe
               </ul>
             </div>
           </div>
@@ -409,6 +428,7 @@
             ### How does PIT do it?
 
             PIT uses ASM to generate mutations
+            <!-- .element: class="fragment" -->
           </script>
         </section>
 
@@ -528,12 +548,18 @@
         <section data-markdown>
           <script type="text/template">
             ### Summary
+
             * *Code coverage* highlights<br>
               code that is definitely *not* tested
+            <!-- .element: class="fragment" -->
+
             * *Mutation testing* highlights code<br>
               that definitely *is* tested
+            <!-- .element: class="fragment" -->
+
             * For non equivalent mutations, good test<br>
               suite should work the same as a hash function
+            <!-- .element: class="fragment" -->
           </script>
         </section>
 
@@ -574,6 +600,7 @@
 
         theme: Reveal.getQueryHash().theme || 'vt', // available themes are in /css/theme
         transition: Reveal.getQueryHash().transition || 'none', // default/cube/page/concave/zoom/linear/fade/none
+        // backgroundTransition: 'zoom',
 
         // Parallax scrolling
         // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
