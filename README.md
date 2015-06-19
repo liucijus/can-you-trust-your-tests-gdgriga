@@ -1,4 +1,4 @@
-Presentation and demo source for presentation given at Riga GDG (2015-06-18)
+Slides and demo source for talk given at Riga GDG (2015-06-18)
 
 # Title: Can You Trust Your Tests?
 ### Speakers: Vaidas Pilkauskas (@liucijus) Tadas Ščerbinskas (@tadassce)
